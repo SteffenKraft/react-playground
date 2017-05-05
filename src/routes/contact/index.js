@@ -4,6 +4,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import Checkbox from 'material-ui/Checkbox'
+import { connect } from 'react-redux'
+
+import { addTodo, toggleTodo, addImage, likeImage } from '../../redux/actions'
+
 
 class Contact extends React.Component {
     constructor(props) {
@@ -16,6 +20,13 @@ class Contact extends React.Component {
             email: '',
             billing: false
         }
+        // Start test debugging //
+        this.props.addTodo('Learn about actions')
+        debugger;
+        // this.props.dispatch(addTodo('Learn more about actions'))
+
+        // console.log(this.props.store.getState())
+        // END test debugging //
     }
 
     handleInputChange = (event) => {
@@ -28,6 +39,7 @@ class Contact extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        this.onTodoClick('thdsf  sfs ')
         // TODO handle fom data from this.state
         console.log(this.state)
     }
@@ -57,7 +69,7 @@ class Contact extends React.Component {
                         hintStyle={{ bottom: '10px' }}
                         underlineFocusStyle={{ transition: '0ms' }}
                         name="name"
-                        // errorText="Please put in your Name"
+                    // errorText="Please put in your Name"
                     />
                     <TextField
                         onChange={this.handleInputChange}
@@ -88,7 +100,7 @@ class Contact extends React.Component {
                         onToggle={this.handleInputChange}
                         label="different address"
                         name="billing"
-                        labelStyle={{textAlign: 'right'}}
+                        labelStyle={{ textAlign: 'right' }}
                         style={{ marginTop: '9px' }}
                     />
                     <RaisedButton
@@ -104,5 +116,13 @@ class Contact extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => { 
+    return {
+        todos: state.todos,
+        images: state.images
+    }
+}
 
-export default Contact
+
+
+export default connect(mapStateToProps, { addImage, addTodo })(Contact)

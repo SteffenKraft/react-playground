@@ -27,7 +27,7 @@ class App extends Component {
           <Layout>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
+            <Route path="/contact/:id" component={Contact} />
           </Layout>
         </Router>
       </MuiThemeProvider>

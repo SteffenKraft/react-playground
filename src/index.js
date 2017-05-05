@@ -7,7 +7,16 @@ import './index.scss';
 // http://stackoverflow.com/a/34015469/988941 
 injectTapEventPlugin();
 
+import { Provider } from 'react-redux'
+import { createStore, compose } from 'redux'
+import app from './redux/reducers'
+let store = createStore(app, {}, compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+))
+
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
